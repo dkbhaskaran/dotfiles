@@ -1,0 +1,30 @@
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+[user]
+	email = dineshkumar.bhaskaran@amd.com
+	name = Dineshkumar Bhaskaran
+[color]
+    ui = auto
+
+[review "git.amd.com:8080"]
+    username = your_username
+    uploadtopic = true
+[push]
+    default = tracking
+[sendemail]
+    smtpencryption = tls
+    smtpserver = smtp.office365.com
+    smtpuser = dineshkumar.bhaskaran@amd.com
+    smtpserverport = 587
+
+[url "ssh://gerritgitmaster/"]
+	pushInsteadOf = ssh://gerritgit/
+
+# token is P5xXpZT3NZFNNiaNHaPW
+# git.adm.com http pass is sPJ1mU14A7046V/OpiFcZjjOMswtvEzexURfZO3tzw
+
+[core]
+	editor = vim
