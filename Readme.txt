@@ -12,7 +12,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
-cp <git repo>/tmux.conf.local .
+cp <current_git_repo>/tmux.conf.local .
 
 # VIM setup
 # ------------
@@ -50,5 +50,5 @@ cd YouCompleteMe; git submodule update --init --recursive; sh install.sh; cd -
 git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts; ./install.py --clangd-completer ; cd -
 
-ln -s <git_repo>/vimrc ~/vim/vimrc
+ln -s <current_git_repo>/vimrc ~/vim/vimrc
 
