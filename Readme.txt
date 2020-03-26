@@ -12,7 +12,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
-cp <git repo>/tmux.conf.local .
+cp <current_git_repo>/tmux.conf.local .tmux.conf.local
+
+sudo apt install build-essential cmake vim python3-dev
 
 # VIM setup
 # ------------
@@ -45,10 +47,10 @@ git clone https://github.com/junegunn/fzf.git
 cd fzf; ./install; cd -
 
 git clone https://github.com/ycm-core/YouCompleteMe.git
-cd YouCompleteMe; git submodule update --init --recursive; sh install.sh; cd -
+cd YouCompleteMe; git submodule update --init --recursive; ./install.py --clangd-completer ; cd -
 
 git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts; ./install.py --clangd-completer ; cd -
+cd fonts; ./install.sh ; cd -
 
-ln -s <git_repo>/vimrc ~/vim/vimrc
+ln -s <current_git_repo>/vimrc ~/vim/vimrc
 
