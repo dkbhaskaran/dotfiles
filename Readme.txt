@@ -12,7 +12,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
-cp <current_git_repo>/tmux.conf.local .
+cp <current_git_repo>/tmux.conf.local .tmux.conf.local
 
 # VIM setup
 # ------------
