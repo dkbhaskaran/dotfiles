@@ -3,6 +3,7 @@
 	st = status
 	ci = commit
 	br = branch
+  logg = log --oneline -15
 [user]
 	email = dineshkumar.bhaskaran@amd.com
 	name = Dineshkumar Bhaskaran
@@ -28,3 +29,6 @@
 
 [core]
 	editor = vim
+	pager = less -iXFR
+[merge]
+	tool = vim
