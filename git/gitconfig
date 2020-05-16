@@ -3,7 +3,8 @@
 	st = status
 	ci = commit
 	br = branch
-  logg = log --oneline -15
+    logg = log --oneline -15
+
 [user]
 	email = dineshkumar.bhaskaran@amd.com
 	name = Dineshkumar Bhaskaran
@@ -24,11 +25,11 @@
 [url "ssh://gerritgitmaster/"]
 	pushInsteadOf = ssh://gerritgit/
 
-# token is P5xXpZT3NZFNNiaNHaPW
-# git.adm.com http pass is sPJ1mU14A7046V/OpiFcZjjOMswtvEzexURfZO3tzw
-
 [core]
-	editor = vim
+	editor = nvim
 	pager = less -iXFR
 [merge]
-	tool = vim
+	tool = nvim
+
+[diff]
+	tool = nvim

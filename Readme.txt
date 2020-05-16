@@ -1,56 +1,45 @@
 #!/bin/bash
 
+DOTFILES=${HOME}/dotfiles
+
 # Install putty powerline fonts using
 # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
-cd $HOME
+cd ${HOME}
 # setup zsh
 # ------------
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# TMUX setup
-cd
-git clone https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
-cp <current_git_repo>/tmux.conf.local .tmux.conf.local
+echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
+cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
 
-sudo apt install build-essential cmake vim python3-dev
+cd ${HOME}
+ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
+ln -s ${DOTFILES}/git/gitconfig ~/.gitconfig   # git 
+ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 
-# VIM setup
-# ------------
 
-mkdir $HOME/.vim
-cd $HOME/.vim/
+# nvim installation and configuration
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim
 
-mkdir backup
-mkdir bundle
-mkdir swp
+sudo apt-get install python-dev python-pip python3-dev python3-pip
 
-cd bundle
+mkdir ${HOME}/.config/nvim
+git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 
-git clone https://github.com/chrisbra/Colorizer
-git clone https://github.com/morhetz/gruvbox.git
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/jacoborus/tender.vim.git
-git clone https://github.com/bling/vim-airline.git
-git clone https://github.com/vim-airline/vim-airline-themes
-git clone https://github.com/altercation/vim-colors-solarized.git
-git clone https://github.com/octol/vim-cpp-enhanced-highlight.git
-git clone https://github.com/sickill/vim-monokai.git
-git clone https://github.com/christoomey/vim-tmux-navigator
-git clone https://github.com/gmarik/vundle.git
-git clone https://github.com/pseewald/nerdtree-tagbar-combined.git
-git clone https://github.com/majutsushi/tagbar.git
-git clone https://github.com/ntpeters/vim-better-whitespace.git
-git clone https://github.com/junegunn/fzf.vim.git
-git clone https://github.com/junegunn/fzf.git
-cd fzf; ./install; cd -
+ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
+ln -s ${DOTFILES}/vim ${HOME}/.vim
 
-git clone https://github.com/ycm-core/YouCompleteMe.git
-cd YouCompleteMe; git submodule update --init --recursive; ./install.py --clangd-completer ; cd -
 
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts; ./install.sh ; cd -
+# coc.vim configuration
+# install ccls
+sudo apt install snapd
+sudo snap install ccls --classic
+# ensure ccls is in your path
 
-ln -s <current_git_repo>/vimrc ~/vim/vimrc
-
+cd ${DOTFILES}/vim/bundle/coc.nvim
+git co remotes/origin/release
+cp ${DOTFILES}/vim/coc-settings.json ~/.config/nvim/coc-settings.json

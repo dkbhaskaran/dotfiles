@@ -9,44 +9,84 @@ filetype plugin indent off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Plugin 'nerdtree'
+Plugin 'preservim/nerdtree'
 " Nerd Tree shortcut
 let NERDTreeShowHidden=1                            " Always show hidden files
 map <C-n> :NERDTreeToggle<CR>                       " Ctrl-N for toggle
 
-Plugin 'YouCompleteMe'
-" YouCompleteMe settings
-" Build with ./install.sh --clang-completer
-let g:ycm_complete_in_comments=1                    " turn on completion in comments
-let g:ycm_collect_identifiers_from_tags_files=1     " turn on tag completion
-let g:ycm_seed_identifiers_with_syntax=1            " complete syntax keywords
-let g:ycm_show_diagnostics_ui = 0                   " disable syntax check
-" Enable to remove error on loading YCM
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-" YCM will auto-close the preview window after the user leaves insert mode
-let g:ycm_autoclose_preview_window_after_insertion = 1
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
-Plugin 'Colorizer'                                  " Show bash colors
-Plugin 'vim-cpp-enhanced-highlight'
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Plugin 'YouCompleteMe'
+"" YouCompleteMe settings
+"" Build with ./install.sh --clang-completer
+" let g:ycm_complete_in_comments=1                    " turn on completion in comments
+" let g:ycm_collect_identifiers_from_tags_files=1     " turn on tag completion
+" let g:ycm_seed_identifiers_with_syntax=1            " complete syntax keywords
+" let g:ycm_show_diagnostics_ui = 0                   " disable syntax check
+" " Enable to remove error on loading YCM
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+" " YCM will auto-close the preview window after the user leaves insert mode
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+
+Plugin 'octol/vim-cpp-enhanced-highlight'
 " vim-cpp-enhanced-highlight settings
 let g:cpp_class_scope_highlight = 1                 " Highlighting of class scope
 let g:cpp_member_variable_highlight = 1             " Highlighting of member variables
 let g:cpp_class_decl_highlight = 1                  " Highlighting of class names in declarations
 let g:cpp_experimental_template_highlight = 1       " Highlight template functions.
 
-Plugin 'vim-tmux-navigator'
-Plugin 'tagbar'
-Plugin 'nerdtree-tagbar-combined.git'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'majutsushi/tagbar'
+Plugin 'pseewald/nerdtree-tagbar-combined.git'
 map <C-c> :ToggleNERDTreeAndTagbar<CR>              " Ctrl-C for focus
 
-Plugin 'vim-surround'
-Plugin 'vim-better-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 " whitespace setting 'StripWhitespace' to remove all whitespaces
 let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
+" let g:strip_whitespace_on_save=1
 
-Plugin 'fzf'
-Plugin 'fzf.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 " FZF setting to behave at ctrlp
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
@@ -54,23 +94,28 @@ let g:fzf_action = {
       \ }
 nnoremap <c-p> :Files<cr>
 
-Plugin 'vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 " solarized settings
 let g:solarized_bold = 0
 let g:solarized_contrast = "low"
 let g:solarized_termcolors = 256
 
-Plugin 'vim-airline'
-Plugin 'vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline_left_alt_sep = '>'
 let g:airline_right_alt_sep = '<'
 let g:airline#extensions#tabline#enabled = 1
+let g:lightline = {
+  \ 'colorscheme': 'edge',
+  \ }
 
-Plugin 'vim-monokai'
-Plugin 'gruvbox'
-Plugin 'tender'
+Plugin 'tpope/vim-fugitive'
+Plugin 'sickill/vim-monokai'
+Plugin 'morhetz/gruvbox'
+Plugin 'sainnhe/edge'
+
 
 " Turn on filetype detection, indent scripts and filetype plugins on
 " Need not to do filetype on as the below is superfluous
@@ -95,6 +140,40 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,extends:⟩,precedes
 set nolist
 set colorcolumn=80
 
+if has('nvim')
+  " nvim don't set numbers for the terminal
+  au TermOpen * setlocal nonumber norelativenumber
+
+  tnoremap <Esc> <C-\><C-n>
+
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+
+  nnoremap <A-h> <C-w>h
+  nnoremap <A-j> <C-w>j
+  nnoremap <A-k> <C-w>k
+  nnoremap <A-l> <C-w>l
+
+  hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
+endif
+
+" Setup for silver searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " Use tab to shift to next buffer and SHIFT-tab to previous buffer
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
@@ -116,14 +195,14 @@ set fileencoding=utf-8                              " The encoding written to fi
 
 syntax on
 set background=dark
-colorscheme gruvbox
+colorscheme edge
+" colorscheme gruvbox
 "colorscheme tender
 "colorscheme monokai
 "colorscheme koehler                                 " Hack to make monokai better
 "colorscheme monokai
 "colorscheme desert
 "colorscheme solarized
-
 
 " Diff mode works better with light backgroud
 if &diff
