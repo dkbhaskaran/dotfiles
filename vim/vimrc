@@ -1,3 +1,5 @@
+let mapleader = ","
+
 " Disable vi compatibility (emulation of old bugs)
 set nocompatible
 
@@ -14,60 +16,28 @@ Plugin 'preservim/nerdtree'
 let NERDTreeShowHidden=1                            " Always show hidden files
 map <C-n> :NERDTreeToggle<CR>                       " Ctrl-N for toggle
 
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+" setup compile_commands.json for a project
+" cmake -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+" ln -s Debug/compile_commands.json .
+Plugin 'ncm2/ncm2'
+Plugin 'roxma/nvim-yarp'
+Plugin 'ncm2/ncm2-bufword'
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+Plugin 'ncm2/ncm2-path'
+Plugin 'ncm2/ncm2-pyclang'
+let g:ncm2_pyclang#library_path = '/usr/lib/llvm-9/lib/libclang.so.1'
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" always show signcolumns
-set signcolumn=yes
-
 Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
 nnoremap <F5> :GdbStart gdb -q <CR> <C-w>H <C-w>r
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Plugin 'YouCompleteMe'
-"" YouCompleteMe settings
-"" Build with ./install.sh --clang-completer
-" let g:ycm_complete_in_comments=1                    " turn on completion in comments
-" let g:ycm_collect_identifiers_from_tags_files=1     " turn on tag completion
-" let g:ycm_seed_identifiers_with_syntax=1            " complete syntax keywords
-" let g:ycm_show_diagnostics_ui = 0                   " disable syntax check
-" " Enable to remove error on loading YCM
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
-" " YCM will auto-close the preview window after the user leaves insert mode
-" let g:ycm_autoclose_preview_window_after_insertion = 1
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " vim-cpp-enhanced-highlight settings
@@ -112,11 +82,16 @@ let g:lightline = {
   \ 'colorscheme': 'edge',
   \ }
 
+Plugin 'machakann/vim-highlightedyank'
+Plugin 'airblade/vim-gitgutter'
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'sickill/vim-monokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/edge'
 
+let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
+let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
 
 " Turn on filetype detection, indent scripts and filetype plugins on
 " Need not to do filetype on as the below is superfluous
@@ -140,6 +115,18 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:↲,extends:⟩,precedes
 "set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,
 set nolist
 set colorcolumn=80
+
+" read/write files when switching buffers
+set autoread
+set autowrite
+
+" Capitals invoke case-insensitive search
+set ignorecase
+set smartcase
+
+" Persist undo even after vim/neovim is closed and reopened
+set undodir=~/.vim/undo
+set undofile
 
 if has('nvim')
   " nvim don't set numbers for the terminal
@@ -197,7 +184,7 @@ set fileencoding=utf-8                              " The encoding written to fi
 syntax on
 set background=dark
 colorscheme edge
-" colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme tender
 "colorscheme monokai
 "colorscheme koehler                                 " Hack to make monokai better

@@ -10,18 +10,21 @@ cd ${HOME}
 # ------------
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Try this as well for autocompletions and highlighting
+# https://gist.github.com/dogrocker/1efb8fd9427779c827058f873b94df95
+
+cd ${HOME}
 #install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 cd ~/.fzf/
 ./install
-
 
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
 
 cd ${HOME}
 ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
-ln -s ${DOTFILES}/git/gitconfig ~/.gitconfig   # git 
+ln -s ${DOTFILES}/git/gitconfig ~/.gitconfig   # git
 ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 
 
@@ -41,13 +44,3 @@ ln -s ${DOTFILES}/vim ${HOME}/.vim
 
 nvim +PluginInstall +qall
 nvim +UpdateRemotePlugins +qall
-
-# coc.vim configuration
-# install ccls
-sudo apt install snapd
-sudo snap install ccls --classic
-# ensure ccls is in your path
-
-cd ${DOTFILES}/vim/bundle/coc.nvim
-git co remotes/origin/release
-cp ${DOTFILES}/vim/coc-settings.json ~/.config/nvim/coc-settings.json
