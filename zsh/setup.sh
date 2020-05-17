@@ -1,5 +1,4 @@
 export CSCOPE_EDITOR=vim
-export TERM=xterm-256color
 
 function zsh_setup()
 {

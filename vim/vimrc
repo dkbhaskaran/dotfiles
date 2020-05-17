@@ -25,6 +25,7 @@ set shortmess+=c
 set signcolumn=yes
 
 Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+nnoremap <F5> :GdbStart gdb -q <CR> <C-w>H <C-w>r
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

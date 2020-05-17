@@ -10,6 +10,12 @@ cd ${HOME}
 # ------------
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+#install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+cd ~/.fzf/
+./install
+
+
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
 
@@ -33,6 +39,8 @@ git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
+nvim +PluginInstall +qall
+nvim +UpdateRemotePlugins +qall
 
 # coc.vim configuration
 # install ccls
