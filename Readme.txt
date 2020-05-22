@@ -6,9 +6,11 @@ DOTFILES=${HOME}/dotfiles
 # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
 cd ${HOME}
+git clone https://github.com/dineshkb-amd/dotfiles.git
+
 # setup zsh
 # ------------
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) --unattended"
 
 # Try this as well for autocompletions and highlighting
 # https://gist.github.com/dogrocker/1efb8fd9427779c827058f873b94df95
@@ -55,4 +57,3 @@ ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
 nvim +PluginInstall +qall
-nvim +UpdateRemotePlugins +qall
