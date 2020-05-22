@@ -43,7 +43,10 @@ ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
 
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+#sudo apt-get install python-dev python-pip python3-dev python3-pip
+#if you need to install locally
+wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py --user
+pip install pynvim  --user
 
 mkdir -p ${HOME}/.config/nvim
 git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
