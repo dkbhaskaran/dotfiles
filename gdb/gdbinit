@@ -14,3 +14,5 @@ def print_smallvector_str
     set $i = $i + 1
   end
 end
+
+source ~/.llvm_pp.py

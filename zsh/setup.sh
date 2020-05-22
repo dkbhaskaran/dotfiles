@@ -6,6 +6,9 @@ function zsh_setup()
   HISTSIZE=10000000
   SAVEHIST=10000000
 
+  # required for disallowing tmux to rename windows
+  export DISABLE_AUTO_TITLE="true"
+
   setopt NULL_GLOB
   # ctrl-u behvior
   bindkey \^U backward-kill-line
@@ -75,7 +78,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 export PATH="/usr/lib/ccache:$HOME/apps/bin:$PATH"
-export CCACHE_DIR=/ccache
+export CCACHE_DIR=${HOME}/.ccache
 
 if [ -e /usr/bin/tmux ]; then
   run_tmux

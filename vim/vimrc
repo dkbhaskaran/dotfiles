@@ -33,6 +33,10 @@ let g:ncm2_pyclang#library_path = '/usr/lib/llvm-9/lib/libclang.so.1'
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -160,7 +164,10 @@ if executable('ag')
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+
+map <C-K> :pyf ~/.vim/clang-format.py<CR>
+imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<CR>
 
 " Use tab to shift to next buffer and SHIFT-tab to previous buffer
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
