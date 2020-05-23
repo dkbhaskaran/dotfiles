@@ -77,7 +77,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-export PATH="/usr/lib/ccache:$HOME/apps/bin:$PATH"
+export PATH="/usr/lib/ccache:${HOME}/.local/bin:${HOME}/.local/usr/bin:$PATH"
 export CCACHE_DIR=${HOME}/.ccache
 
 if [ -e /usr/bin/tmux ]; then
