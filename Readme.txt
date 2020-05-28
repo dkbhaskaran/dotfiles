@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# sudo apt-get install -y zsh fuse locales
+
 DOTFILES=${HOME}/dotfiles
 
 # Install putty powerline fonts using
@@ -44,6 +46,7 @@ ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 #if you need to install locally
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
+mv nvim.appimage ~/.local/bin/nvim
 
 #sudo apt-get install python-dev python-pip python3-dev python3-pip
 #if you need to install locally
@@ -56,4 +59,4 @@ git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
-nvim +PluginInstall +qall
+~/.local/bin/nvim +PluginInstall +qall
