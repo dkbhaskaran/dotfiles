@@ -60,6 +60,8 @@ mkdir -p ${HOME}/.config/nvim
 git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 
 pip install pynvim  --user
+pip3 install pynvim  --user
+
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
