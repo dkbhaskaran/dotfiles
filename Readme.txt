@@ -35,6 +35,11 @@ ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
 ln -s ${DOTFILES}/git/gitconfig ~/.gitconfig   # git
 ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 
+#setup ripgrep
+cd ~/.local
+wget https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+dpkg -x ripgrep_12.1.1_amd64.deb .
+rm -f ripgrep_12.1.1_amd64.deb
 
 # nvim installation and configuration
 # sudo apt-get install software-properties-common
@@ -50,11 +55,11 @@ mv nvim.appimage ~/.local/bin/nvim
 #sudo apt-get install python-dev python-pip python3-dev python3-pip
 #if you need to install locally
 wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py --user
-pip install pynvim  --user
 
 mkdir -p ${HOME}/.config/nvim
 git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 
+pip install pynvim  --user
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
