@@ -2,8 +2,6 @@
 
 # sudo apt-get install -y zsh fuse locales
 
-DOTFILES=${HOME}/dotfiles
-
 # Install putty powerline fonts using
 # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
@@ -28,6 +26,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 cd ~/.fzf/
 ./install
 
+DOTFILES=${HOME}/dotfiles
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
 
