@@ -77,6 +77,10 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
+if command -v rg > /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+fi
+
 export PATH="/usr/lib/ccache:${HOME}/.local/bin:${HOME}/.local/usr/bin:$PATH"
 export CCACHE_DIR=${HOME}/.ccache
 

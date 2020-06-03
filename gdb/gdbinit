@@ -15,4 +15,12 @@ def print_smallvector_str
   end
 end
 
-source ~/.llvm_pp.py
+def print_smallvector_stdstr
+  set $i = 0
+  while ($i < $arg0.size())
+    printf "%d %s\n", $i, *(char **)(&$arg0[$i])
+    set $i = $i + 1
+  end
+end
+
+#source ~/.llvm_pp.py

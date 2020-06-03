@@ -86,6 +86,9 @@ let g:lightline = {
   \ 'colorscheme': 'edge',
   \ }
 
+Plugin 'rhysd/vim-clang-format'
+let g:clang_format#code_style = 'llvm'
+
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'airblade/vim-gitgutter'
 
@@ -131,6 +134,14 @@ set smartcase
 " Persist undo even after vim/neovim is closed and reopened
 set undodir=~/.vim/undo
 set undofile
+" Custom mappings
+"
+nnoremap <Leader>r :%s///g<LEFT><LEFT>
+nnoremap <Leader>rc :%s///gc<LEFT><LEFT><LEFT>
+
+xnoremap <Leader>r :%s///g<LEFT><LEFT>
+xnoremap <Leader>rc :%s///gc<LEFT><LEFT><LEFT>
+
 
 if has('nvim')
   " nvim don't set numbers for the terminal
