@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES=${HOME}/dotfiles
+# sudo apt-get install -y zsh fuse locales
 
 # Install putty powerline fonts using
 # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
@@ -26,6 +26,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 cd ~/.fzf/
 ./install
 
+DOTFILES=${HOME}/dotfiles
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
 
@@ -44,6 +45,7 @@ ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 #if you need to install locally
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
+mv nvim.appimage ~/.local/bin/nvim
 
 #sudo apt-get install python-dev python-pip python3-dev python3-pip
 #if you need to install locally
@@ -56,4 +58,4 @@ git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
-nvim +PluginInstall +qall
+~/.local/bin/nvim +PluginInstall +qall
