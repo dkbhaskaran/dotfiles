@@ -66,3 +66,4 @@ ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
 ~/.local/bin/nvim +PluginInstall +qall
+~/.local/bin/nvim +UpdateRemotePlugins +qall
