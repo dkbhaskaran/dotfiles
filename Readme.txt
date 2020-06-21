@@ -6,7 +6,7 @@
 # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
 cd ${HOME}
-git clone https://github.com/dineshkb-amd/dotfiles.git
+git clone https://github.com/dkbhaskaran/dotfiles.git
 
 # setup zsh
 # ------------
