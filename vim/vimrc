@@ -193,6 +193,18 @@ set directory=~/.vim/swp/                           " Get rid of swap files too
 set encoding=utf-8                                  " The encoding displayed.
 set fileencoding=utf-8                              " The encoding written to file.
 
+" Spell check for markdown files and git commit.
+" Help - Add a word to dictionary using 'zg' and 'z=' to correct.
+autocmd FileType gitcommit setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal spell
+set spellfile=~/.vim/spell/en.utf-8.add
+
+function! TerminalPreviewMarkdown()
+	vert new % | terminal ! mdv %
+endfu
+
+map <silent> <leader>m :call TerminalPreviewMarkdown()<CR>
+
 syntax on
 set background=dark
 colorscheme edge
