@@ -28,7 +28,10 @@ cd ~/.fzf/
 
 DOTFILES=${HOME}/dotfiles
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
-cp ${DOTFILES}/zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes # for prompt
+
+cd ${HOME}/.oh-my-zsh
+git apply ${DOTFILES}/zsh/themes.patch
+sed "s/ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/g" ${HOME}/.zshrc
 
 cd ${HOME}
 ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
@@ -40,6 +43,9 @@ cd ~/.local
 wget https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
 dpkg -x ripgrep_12.1.1_amd64.deb .
 rm -f ripgrep_12.1.1_amd64.deb
+
+# For terminal filesytem utility. Install from sources if required
+sudo apt-get install ranger
 
 # nvim installation and configuration
 # sudo apt-get install software-properties-common

@@ -1,4 +1,5 @@
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 " Disable vi compatibility (emulation of old bugs)
 set nocompatible
@@ -16,32 +17,34 @@ Plugin 'preservim/nerdtree'
 let NERDTreeShowHidden=1                            " Always show hidden files
 map <C-n> :NERDTreeToggle<CR>                       " Ctrl-N for toggle
 
-" setup compile_commands.json for a project
-" cmake -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
-" ln -s Debug/compile_commands.json .
-Plugin 'ncm2/ncm2'
-Plugin 'roxma/nvim-yarp'
-Plugin 'ncm2/ncm2-bufword'
+if has('nvim')
+  " setup compile_commands.json for a project
+  " cmake -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+  " ln -s Debug/compile_commands.json .
+  Plugin 'ncm2/ncm2'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'ncm2/ncm2-bufword'
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+  " enable ncm2 for all buffers
+  autocmd BufEnter * call ncm2#enable_for_buffer()
 
-Plugin 'ncm2/ncm2-path'
-Plugin 'ncm2/ncm2-pyclang'
-let g:ncm2_pyclang#library_path = '/usr/lib/llvm-9/lib/libclang.so.1'
+  Plugin 'ncm2/ncm2-path'
+  Plugin 'ncm2/ncm2-pyclang'
+  let g:ncm2_pyclang#library_path = '/usr/lib/llvm-9/lib/libclang.so.1'
 
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
+  " IMPORTANT: :help Ncm2PopupOpen for more information
+  set completeopt=noinsert,menuone,noselect
 
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  " Use <TAB> to select the popup menu:
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
+  " don't give |ins-completion-menu| messages.
+  set shortmess+=c
 
-Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-nnoremap <F5> :GdbStart gdb -q <CR> <C-w>H <C-w>r
+  Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+  nnoremap <F5> :GdbStart gdb -q <CR> <C-w>H <C-w>r
+endif
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " vim-cpp-enhanced-highlight settings
@@ -62,6 +65,7 @@ let g:better_whitespace_enabled=1
 
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter.git'
 " FZF setting to behave at ctrlp
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
@@ -86,6 +90,10 @@ let g:lightline = {
   \ 'colorscheme': 'edge',
   \ }
 
+Plugin 'mhinz/vim-startify.git'
+Plugin 'francoiscabrol/ranger.vim'
+Plugin 'liuchengxu/vim-which-key.git'
+
 Plugin 'rhysd/vim-clang-format'
 let g:clang_format#code_style = 'llvm'
 
@@ -93,6 +101,8 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'airblade/vim-gitgutter'
 
 Plugin 'tpope/vim-fugitive'
+Plugin 'will133/vim-dirdiff'
+
 Plugin 'sickill/vim-monokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/edge'
@@ -136,12 +146,71 @@ set undodir=~/.vim/undo
 set undofile
 " Custom mappings
 "
+
 nnoremap <Leader>r :%s///g<LEFT><LEFT>
 nnoremap <Leader>rc :%s///gc<LEFT><LEFT><LEFT>
 
 xnoremap <Leader>r :%s///g<LEFT><LEFT>
 xnoremap <Leader>rc :%s///gc<LEFT><LEFT><LEFT>
 
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
+let g:which_key_map =  {}
+let g:which_key_map['w'] = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+
+let g:which_key_map.b = {
+       \ 'name' : '+buffer' ,
+       \ 'd' : 'delete-buffer',
+       \ 'f' : 'first-buffer',
+       \ 'l' : 'last-buffer',
+       \ 'n' : 'next-buffer',
+       \ 'p' : 'previous-buffer',
+       \ 'b' : 'fzf-buffer',
+       \ 'x' : 'delete-buffer-and-window',
+       \ }
+
+"let g:which_key_map['g'] = {
+"      \ 'name' : '+git/version-control' ,
+"      \ 'b' : 'fugitive-blame',
+"      \ 'c' : 'commits-for-current-buffer',
+"      \ 'C' : 'fugitive-commit',
+"      \ 'd' : 'fugitive-diff',
+"      \ 'e' : 'fugitive-edit',
+"      \ 'l' : 'fugitive-log',
+"      \ 'm' : 'fugitive-move',
+"      \ 'r' : 'fugitive-read',
+"      \ 's' : 'fugitive-status',
+"      \ 'w' : 'fugitive-write',
+"      \ 'p' : 'fugitive-pull',
+"      \ 'P' : 'fugitive-push',
+"      \ 't' : 'toggle-gutter',
+"      \ 'h' : {
+"           \ 'name' : '+hunks',
+"           \ 'n' : 'next',
+"           \ 'p' : 'prev',
+"           \}
+"      \ }
 
 if has('nvim')
   " nvim don't set numbers for the terminal
@@ -210,9 +279,7 @@ set background=dark
 colorscheme edge
 "colorscheme gruvbox
 "colorscheme tender
-"colorscheme monokai
-"colorscheme koehler                                 " Hack to make monokai better
-"colorscheme monokai
+"colorscheme koehler
 "colorscheme desert
 "colorscheme solarized
 

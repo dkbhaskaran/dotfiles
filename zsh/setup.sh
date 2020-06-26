@@ -68,7 +68,7 @@ export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 alias vim=nvim
 export TZ="/usr/share/zoneinfo/Asia/Calcutta"
 
-export PATH=$HOME/.local/bin:$HOME/.local/bin/arcanist/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/bin/arcanist/bin:/snap/bin/:$PATH
 # export DK_ROOT=~/git/dk/lnx
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -79,6 +79,7 @@ if command -v rg > /dev/null; then
 fi
 
 export PATH="/usr/lib/ccache:${HOME}/.local/bin:${HOME}/.local/usr/bin:$PATH"
+export TERM=screen-256color
 export CCACHE_DIR=${HOME}/.ccache
 
 if [ -e /usr/bin/tmux ]; then
