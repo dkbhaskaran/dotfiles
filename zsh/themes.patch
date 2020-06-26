@@ -1,0 +1,63 @@
+diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
+index 8c700d0..e2c3a58 100644
+--- a/themes/agnoster.zsh-theme
++++ b/themes/agnoster.zsh-theme
+@@ -89,7 +89,8 @@ prompt_end() {
+ # Context: user@hostname (who am I and where am I)
+ prompt_context() {
+   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
++    #prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
++    prompt_segment 222 black "%(!.%{%F{yellow}%}.)$(get_prompt)" # Dinesh
+   fi
+ }
+ 
+@@ -113,7 +114,7 @@ prompt_git() {
+     if [[ -n $dirty ]]; then
+       prompt_segment yellow black
+     else
+-      prompt_segment green $CURRENT_FG
++      prompt_segment 172 $CURRENT_FG # Changed the color - Dinesh
+     fi
+ 
+     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
+@@ -204,7 +205,7 @@ prompt_hg() {
+ 
+ # Dir: current working directory
+ prompt_dir() {
+-  prompt_segment blue $CURRENT_FG '%~'
++  prompt_segment 117 $CURRENT_FG '%5~' # Changed the blue color - Dinesh
+ }
+ 
+ # Virtualenv: current working virtualenv
+@@ -238,7 +239,7 @@ prompt_aws() {
+   [[ -z "$AWS_PROFILE" ]] && return
+   case "$AWS_PROFILE" in
+     *-prod|*production*) prompt_segment red yellow  "AWS: $AWS_PROFILE" ;;
+-    *) prompt_segment green black "AWS: $AWS_PROFILE" ;;
++    *) prompt_segment black "AWS: $AWS_PROFILE" ;;
+   esac
+ }
+ 
+@@ -246,8 +247,8 @@ prompt_aws() {
+ build_prompt() {
+   RETVAL=$?
+   prompt_status
+-  prompt_virtualenv
+-  prompt_aws
++  #prompt_virtualenv
++  #prompt_aws
+   prompt_context
+   prompt_dir
+   prompt_git
+diff --git a/themes/robbyrussell.zsh-theme b/themes/robbyrussell.zsh-theme
+index 2fd5f2c..d390f1e 100644
+--- a/themes/robbyrussell.zsh-theme
++++ b/themes/robbyrussell.zsh-theme
+@@ -1,5 +1,5 @@
+ PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+-PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
++PROMPT+=' %{$fg[cyan]%}$(get_prompt) %5~%{$reset_color%} %5 $(git_prompt_info)'
+ 
+ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "

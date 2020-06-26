@@ -86,6 +86,9 @@ let g:lightline = {
   \ 'colorscheme': 'edge',
   \ }
 
+Plugin 'mhinz/vim-startify.git'
+Plugin 'francoiscabrol/ranger.vim'
+
 Plugin 'rhysd/vim-clang-format'
 let g:clang_format#code_style = 'llvm'
 

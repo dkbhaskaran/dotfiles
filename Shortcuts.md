@@ -40,3 +40,6 @@ These also work with zsh-autocompletion
     CTRL-R: Search the command history. Accept with ENTER/RETURN, abort with CTRL-G.
     CTRL-P/UP: The previous command in history.
     CTRL-N/DOWN: The next command in history.
+
+## Shortcuts for nvim
+<leader> f          : ranger
