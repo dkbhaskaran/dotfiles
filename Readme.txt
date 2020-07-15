@@ -31,7 +31,7 @@ echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 
 cd ${HOME}/.oh-my-zsh
 git apply ${DOTFILES}/zsh/themes.patch
-sed "s/ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/g" ${HOME}/.zshrc
+sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/g" ${HOME}/.zshrc
 
 cd ${HOME}
 ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
@@ -56,6 +56,7 @@ sudo apt-get install ranger
 #if you need to install locally
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod +x nvim.appimage
+mkdir -p ~/.local/bin/
 mv nvim.appimage ~/.local/bin/nvim
 
 #sudo apt-get install python-dev python-pip python3-dev python3-pip
