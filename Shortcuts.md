@@ -43,35 +43,35 @@ These also work with zsh-autocompletion
 
 ### FZF shortcuts 
 ```
-  ALT-C                   : Change direcotry quickly.
-  CTRL-T                  : Opens up current direcotry searching through the files.
+ALT-C                   : Change direcotry quickly.
+CTRL-T                  : Opens up current direcotry searching through the files.
 ```    
 
 ## Shortcuts for nvim
 ```
-  <leader>                : Shows the available options
-  <leader> f              : ranger
+<leader>                : Shows the available options
+<leader> f              : ranger
   
-  :FZF or :Files          : Open a window for searching files
-  :Rg                     : Ripgrep in window
-  :Lines                  : Search through all the buffers open
-  :History:               : Search through history of vim commands.
+:FZF or :Files          : Open a window for searching files
+:Rg                     : Ripgrep in window
+:Lines                  : Search through all the buffers open
+:History:               : Search through history of vim commands.
 ```
 
 ### Vim and Windows
 ```
-  :resize 60              : Change the height to 60 rows
-  :res +5/-5              : Increment or decrement by 5 rows
-  :vertical resize 60     : Increase the to 60 columns
-  :vert res +5/-5         : Increment or decrement by 5 cols
-  Ctrl-w + / Ctrl-w -     : Resize the height
-  Ctrl-w > / Ctrl-w <     : Resize the width
-  Ctrl-w =                : Make all windows equal dimension
-  Ctrl-w _                : Increase a window to its maximum height
-  Ctrl-w |                : increase a window to its maximum width
+:resize 60              : Change the height to 60 rows
+:res +5/-5              : Increment or decrement by 5 rows
+:vertical resize 60     : Increase the to 60 columns
+:vert res +5/-5         : Increment or decrement by 5 cols
+Ctrl-w + / Ctrl-w -     : Resize the height
+Ctrl-w > / Ctrl-w <     : Resize the width
+Ctrl-w =                : Make all windows equal dimension
+Ctrl-w _                : Increase a window to its maximum height
+Ctrl-w |                : increase a window to its maximum width
 ```
 
 ### DirDiff Plugin
 ```
-  :DirDiff <dir1> <dir2>  : Directory based diff and merge.
+:DirDiff <dir1> <dir2>  : Directory based diff and merge.
 ```
