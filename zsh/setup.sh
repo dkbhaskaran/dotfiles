@@ -14,6 +14,9 @@ function zsh_setup()
   bindkey \^U backward-kill-line
   bindkey "^[[C" forward-word
   bindkey "^[[D" backward-word
+
+  unsetopt share_history
+  setopt no_share_history
 }
 
 function run_tmux() {
@@ -41,7 +44,10 @@ function drun() {
   count=$(docker ps | wc -l)
   count=$((count-1))
 
-  docker run -d -it --name=docker-${count} --network=host --device=/dev/kfd --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -v $HOME/dockerx:/dockerx -v /ccache:/ccache $1
+  docker run -d -it --name=docker-${count} --network=host --device=/dev/kfd \
+    --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt \
+    seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx \
+    -v /ccache:/ccache $1
 }
 
 function dexec() {
