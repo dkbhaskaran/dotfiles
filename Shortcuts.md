@@ -45,6 +45,35 @@ These also work with zsh-autocompletion
 ```
 ALT-C                   : Change direcotry quickly.
 CTRL-T                  : Opens up current direcotry searching through the files.
+
+In FZF window
+?                       : Toggle preview
+CTRL-A                  : Select All
+CTRL-E                  : Open in VIM
+SHIFT-TAB               : Select multiple entries
+
+FZF can be used to filter the output and put the exact match. e.g.
+
+1. find . -type f | fzf // Or just type fzf
+
+2. fzf points out hihger ranked "exact matches" and partial matches in the order. 
+If the "'" proceeds the seach string only exact matches are provided or with 
+fzf -e flag. 
+
+3. fzf does not use glob patterns instead multiple search strings can be used on 
+the fzf prompt like 
+
+$ fzf
+> var .sh$ !private 
+
+Search files with "var" in the name ending with .sh and does not contain private.
+
+4.Changing the direcotry.
+$ cd /**<TAB> 
+
+5. Kill a process.
+$ kill -9 <TAB><TAB>
+
 ```    
 
 ## Shortcuts for nvim
@@ -56,6 +85,11 @@ CTRL-T                  : Opens up current direcotry searching through the files
 :Rg                     : Ripgrep in window
 :Lines                  : Search through all the buffers open
 :History:               : Search through history of vim commands.
+CTRL-P                  : Opens up current direcotry searching through the files.
+:FZF
+  CTRL-V                : Opens in a vert split.
+  SHIFT-TAB             : Select multiple entries.
+
 ```
 
 ### Vim and Windows
@@ -67,9 +101,27 @@ CTRL-T                  : Opens up current direcotry searching through the files
 Ctrl-w + / Ctrl-w -     : Resize the height
 Ctrl-w > / Ctrl-w <     : Resize the width
 Ctrl-w =                : Make all windows equal dimension
-Ctrl-w _                : Increase a window to its maximum height
 Ctrl-w |                : increase a window to its maximum width
+Ctrl-w _                : Increase a window to its maximum height
+Ctrl-w v                : Just create a vertical split
+Ctrl-w }                : Opens a preview window with the location of a tag
+Ctrl-w z                : Closes a preview window
+Ctrl \                  : Opens the tag in a new tab
+ALT-]                   : Opens the tag in a vert split
 ```
+
+### vim-gitgutter
+A Vim plugin which shows a git diff in the sign column.
+
+```
+[c and ]c               : move to prev/next hunk
+GitGutterDisable        : turn off
+GitGutterEnable         : turn on
+GitGutterToggle         : toggle
+
+GitGutterFold           : Fold/UnFold all the un-changed lines
+```
+### vim-diff-enhanced Plugin
 
 ### DirDiff Plugin
 ```

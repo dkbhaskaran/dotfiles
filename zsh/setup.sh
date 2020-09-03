@@ -17,6 +17,28 @@ function zsh_setup()
 
   unsetopt share_history
   setopt no_share_history
+
+  export FZF_DEFAULT_OPTS="
+    --layout=reverse
+    --info=inline
+    --height=80%
+    --multi
+    --preview-window=:hidden
+    --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+    --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+    --prompt='∼ ' --pointer='▶' --marker='✓'
+    --bind '?:toggle-preview'
+    --bind 'ctrl-a:select-all'
+    --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+    --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+    "
+  # FZF defaults.
+  export FZF_COMPLETION_TRIGGER='**'
+
+  if command -v rg > /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+  fi
+
 }
 
 function run_tmux() {
@@ -79,10 +101,6 @@ export PATH=$HOME/.local/bin:$HOME/.local/bin/arcanist/bin:/snap/bin/:$PATH
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-
-if command -v rg > /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-fi
 
 export PATH="/usr/lib/ccache:${HOME}/.local/bin:${HOME}/.local/usr/bin:$PATH"
 export TERM=screen-256color

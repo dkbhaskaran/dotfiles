@@ -65,7 +65,8 @@ let g:better_whitespace_enabled=1
 
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-rooter.git'
+Plugin 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Plugin 'airblade/vim-rooter.git'
 " FZF setting to behave at ctrlp
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
@@ -146,6 +147,9 @@ set undodir=~/.vim/undo
 set undofile
 " Custom mappings
 "
+
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 nnoremap <Leader>r :%s///g<LEFT><LEFT>
 nnoremap <Leader>rc :%s///gc<LEFT><LEFT><LEFT>
