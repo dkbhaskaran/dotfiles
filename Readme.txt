@@ -39,19 +39,19 @@ ln -s ${DOTFILES}/git/gitconfig ~/.gitconfig   # git
 ln -s ${DOTFILES}/gdb/gdbinit ~/.gdbinit
 
 #setup ripgrep
-cd ~/.local
+mkdir -p ~/.local; cd ~/.local
 wget https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
 dpkg -x ripgrep_12.1.1_amd64.deb .
 rm -f ripgrep_12.1.1_amd64.deb
 
 # For terminal filesytem utility. Install from sources if required
-sudo apt-get install ranger
+sudo apt-get install -y ranger
 
 # nvim installation and configuration
 # sudo apt-get install software-properties-common
 # sudo add-apt-repository ppa:neovim-ppa/stable
 # sudo apt-get update
-# sudo apt-get install neovim
+# sudo apt-get install -y neovim
 
 #if you need to install locally
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
@@ -69,6 +69,7 @@ git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 pip install pynvim  --user
 pip3 install pynvim  --user
 
+rm -rf ${HOME}/.config/nvim/ ${HOME}/.vim
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES}/vim ${HOME}/.vim
 
