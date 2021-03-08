@@ -1,5 +1,5 @@
 nnoremap <SPACE> <Nop>
-let mapleader=" "
+let mapleader=","
 
 " Disable vi compatibility (emulation of old bugs)
 set nocompatible
@@ -43,7 +43,7 @@ if has('nvim')
   set shortmess+=c
 
   Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-  nnoremap <F5> :GdbStart gdb -q <CR> <C-w>H <C-w>r
+  nnoremap <F5> :CocDisable <CR> :GdbStart gdb -q <CR> <C-w>H <C-w>r
 endif
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -107,6 +107,38 @@ Plugin 'will133/vim-dirdiff'
 Plugin 'sickill/vim-monokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/edge'
+Plugin 'endel/vim-github-colorscheme'
+Plugin 'NLKNguyen/papercolor-theme'
+
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'lifepillar/vim-solarized8'
+
+"https://chmanie.com/post/2020/07/17/modern-c-development-in-neovim/
+Plugin 'neoclide/coc.nvim'
+Plugin 'jackguo380/vim-lsp-cxx-highlight'
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+" Install cpplint using pip install
+Plugin 'vim-syntastic/syntastic'
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+Plugin 'ludovicchabant/vim-gutentags'
+let  g:gutentags_ctags_tagfile = '.tags'
+let  s:vim_tags = expand('~/.cache/tags')
+let  g:gutentags_cache_dir = s:vim_tags
+let  g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let  g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let  g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+Plugin 'regedarek/ZoomWin'
 
 let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
 let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
@@ -147,6 +179,10 @@ set undodir=~/.vim/undo
 set undofile
 " Custom mappings
 "
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -289,6 +325,15 @@ colorscheme edge
 
 " Diff mode works better with light backgroud
 if &diff
-    colorscheme gruvbox
-    "set background=light
+    colorscheme PaperColor
+    set background=light
+    let g:airline_theme='papercolor'
 end
+
+" Upgrade the pynvim to latest
+" pip2 install --upgrade pynvim
+" pip3 install --upgrade pynvim
+"
+" Update GDB package using
+" nvim +UpdateRemotePlugins +qall
+" Install node, yarn from https://github.com/nodesource/distributions/blob/master/README.md#deb
