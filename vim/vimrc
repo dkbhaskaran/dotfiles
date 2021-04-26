@@ -42,8 +42,11 @@ if has('nvim')
   " don't give |ins-completion-menu| messages.
   set shortmess+=c
 
-  Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-  nnoremap <F5> :CocDisable <CR> :GdbStart gdb -q <CR> <C-w>H <C-w>r
+  " Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
+  " nnoremap <F5> :CocDisable <CR> :GdbStart gdb -q <CR> <C-w>H <C-w>r
+  packadd termdebug
+  let g:termdebug_wide=1
+  nnoremap <F5> :CocDisable <CR> :Termdebug <CR> <C-w>j 10<C-w>_ <C-w>k i
 endif
 
 Plugin 'octol/vim-cpp-enhanced-highlight'

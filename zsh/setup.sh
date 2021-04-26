@@ -1,3 +1,6 @@
+alias vim=nvim
+alias vimdiff='nvim -d'
+
 export CSCOPE_EDITOR=vim
 
 function zsh_setup()
@@ -93,7 +96,6 @@ function get_prompt() {
 }
 
 export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-alias vim=nvim
 export TZ="/usr/share/zoneinfo/Asia/Calcutta"
 
 export PATH=$HOME/.local/bin:$HOME/.local/bin/arcanist/bin:/snap/bin/:$PATH

@@ -1,3 +1,10 @@
+set print pretty on
+set print array on
+set print demangle on
+set print asm-demangle on
+set print object on
+set print vtbl on
+
 def print_smallvector_char
   set $i = 0
   while ($i < $arg0.size())
@@ -31,3 +38,5 @@ def print_smallvector_ptr
   end
 end
 #source ~/.llvm_pp.py
+
+source /home/dbhaskar/amd-stg-open/lightning/compiler/llvm-project/llvm/utils/gdb-scripts/prettyprinters.py
