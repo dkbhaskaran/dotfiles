@@ -69,10 +69,12 @@ function drun() {
   count=$(docker ps | wc -l)
   count=$((count-1))
 
-  docker run -d -it --name=docker-${count} --network=host --device=/dev/kfd \
-    --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt \
-    seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx \
-    -v /ccache:/ccache $1
+  container=$(docker run -d -it --name=dbhaskar-${count} --network=host  --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx $1)
+  docker exec -it $container apt update
+  docker exec -it $container apt install -y zsh language-pack-en
+  docker exec -it $container update-locale
+
+  echo Created container $container
 }
 
 function dexec() {
@@ -98,13 +100,11 @@ function get_prompt() {
 export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 export TZ="/usr/share/zoneinfo/Asia/Calcutta"
 
-export PATH=$HOME/.local/bin:$HOME/.local/bin/arcanist/bin:/snap/bin/:$PATH
-# export DK_ROOT=~/git/dk/lnx
+export PATH=$HOME/.local/bin:$HOME/.local/usr/bin/:$PATH
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-export PATH="/usr/lib/ccache:${HOME}/.local/bin:${HOME}/.local/usr/bin:$PATH"
 export TERM=screen-256color
 export CCACHE_DIR=${HOME}/.ccache
 
