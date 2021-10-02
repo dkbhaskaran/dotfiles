@@ -19,7 +19,7 @@ cd ~/.fzf/
 ./install --all
 
 
-DOTFILES=${HOME}/.local/dotfiles
+export DOTFILES=${HOME}/.local/dotfiles
 echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 
 cd ${HOME}/.oh-my-zsh
