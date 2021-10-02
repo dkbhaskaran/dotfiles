@@ -42,7 +42,7 @@ cd ~/.local
 wget http://archive.ubuntu.com/ubuntu/pool/universe/u/universal-ctags/universal-ctags_0+git20200824-1_amd64.deb
 dpkg -x universal-ctags_0+git20200824-1_amd64.deb .
 
-mkdir ${HOME}/.config/nvim
+mkdir -p ${HOME}/.config/nvim
 git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
 
 ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
