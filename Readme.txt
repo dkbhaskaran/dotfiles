@@ -7,4 +7,4 @@
   # https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
 2. Run
-   sh -c "$(wget https://github.com/dkbhaskaran/dotfiles/blob/master/install.sh -O -)"
+   sh -c "$(wget https://raw.githubusercontent.com/dkbhaskaran/dotfiles/master/install.sh -O -)"
