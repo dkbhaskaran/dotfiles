@@ -17,38 +17,6 @@ Plugin 'preservim/nerdtree'
 let NERDTreeShowHidden=1                            " Always show hidden files
 map <C-n> :NERDTreeToggle<CR>                       " Ctrl-N for toggle
 
-if has('nvim')
-  " setup compile_commands.json for a project
-  " cmake -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
-  " ln -s Debug/compile_commands.json .
-  Plugin 'ncm2/ncm2'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'ncm2/ncm2-bufword'
-
-  " enable ncm2 for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-
-  Plugin 'ncm2/ncm2-path'
-  Plugin 'ncm2/ncm2-pyclang'
-  let g:ncm2_pyclang#library_path = '/usr/lib/llvm-9/lib/libclang.so.1'
-
-  " IMPORTANT: :help Ncm2PopupOpen for more information
-  set completeopt=noinsert,menuone,noselect
-
-  " Use <TAB> to select the popup menu:
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-  " don't give |ins-completion-menu| messages.
-  set shortmess+=c
-
-  " Plugin 'sakhnik/nvim-gdb', { 'do': ':!./install.sh \| UpdateRemotePlugins' }
-  " nnoremap <F5> :CocDisable <CR> :GdbStart gdb -q <CR> <C-w>H <C-w>r
-  packadd termdebug
-  let g:termdebug_wide=1
-  nnoremap <F5> :CocDisable <CR> :Termdebug <CR> <C-w>j 10<C-w>_ <C-w>k i
-endif
-
 Plugin 'octol/vim-cpp-enhanced-highlight'
 " vim-cpp-enhanced-highlight settings
 let g:cpp_class_scope_highlight = 1                 " Highlighting of class scope
@@ -116,10 +84,6 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lifepillar/vim-solarized8'
 
-"https://chmanie.com/post/2020/07/17/modern-c-development-in-neovim/
-Plugin 'neoclide/coc.nvim'
-Plugin 'jackguo380/vim-lsp-cxx-highlight'
-
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
@@ -133,13 +97,15 @@ let g:syntastic_cpp_cpplint_exec = 'cpplint'
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-Plugin 'ludovicchabant/vim-gutentags'
-let  g:gutentags_ctags_tagfile = '.tags'
-let  s:vim_tags = expand('~/.cache/tags')
-let  g:gutentags_cache_dir = s:vim_tags
-let  g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let  g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let  g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+if executable('ctags')
+  Plugin 'ludovicchabant/vim-gutentags'
+  let  g:gutentags_ctags_tagfile = '.tags'
+  let  s:vim_tags = expand('~/.cache/tags')
+  let  g:gutentags_cache_dir = s:vim_tags
+  let  g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+  let  g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+  let  g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+endif
 
 Plugin 'regedarek/ZoomWin'
 
