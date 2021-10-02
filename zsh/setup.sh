@@ -71,7 +71,7 @@ function drun() {
 
   container=$(docker run -d -it --name=dbhaskar-${count} --network=host  --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx $1)
   docker exec -it $container apt update
-  docker exec -it $container apt install -y zsh language-pack-en
+  docker exec -it $container apt install -y zsh git wget language-pack-en
   docker exec -it $container update-locale
 
   echo Created container $container
