@@ -107,6 +107,29 @@ if executable('ctags')
   let  g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 endif
 
+if has('nvim')
+
+Plugin 'sunjon/shade.nvim'
+lua << EOF
+  require'shade'.setup({
+  overlay_opacity = 50,
+  opacity_step = 1,
+  keys = {
+    brightness_up    = '<C-Up>',
+    brightness_down  = '<C-Down>',
+    toggle           = '<Leader>s',
+  }
+})
+EOF
+
+" Interesting plugin..Try :Telescope live_grep/find_files
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
+
+Plugin 'nvim-treesitter/nvim-treesitter'
+" Install : TSInstall cpp
+endif
+
 Plugin 'regedarek/ZoomWin'
 
 let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
@@ -238,6 +261,9 @@ if has('nvim')
   nnoremap <A-l> <C-w>l
 
   hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
+
+  packadd termdebug
+  let g:termdebug_wide = 1
 endif
 
 " Setup for ripgrep
