@@ -35,7 +35,7 @@ rm -f ripgrep_13.0.0_amd64.deb
 cd ~/.local
 # Nightly builds' link is not consistent.
 # wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-wget https://github.com/neovim/neovim/releases/download/v0.5.1/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.6.1/nvim-linux64.tar.gz
 tar -xf nvim-linux64.tar.gz --strip-components 1
 
 cd ~/.local
