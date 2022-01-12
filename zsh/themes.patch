@@ -1,13 +1,13 @@
-diff --git a/themes/agnoster.zsh-theme b/themes/agnoster.zsh-theme
-index fe7ddba..fdfac04 100644
---- a/themes/agnoster.zsh-theme
-+++ b/themes/agnoster.zsh-theme
+Binary files .oh-my-zsh/.git/index and .oh-my-zsh.back/.git/index differ
+diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/agnoster.zsh-theme
+--- .oh-my-zsh/themes/agnoster.zsh-theme	2022-01-12 05:35:03.899663688 +0000
++++ .oh-my-zsh.back/themes/agnoster.zsh-theme	2022-01-12 04:57:57.875076776 +0000
 @@ -89,7 +89,7 @@ prompt_end() {
  # Context: user@hostname (who am I and where am I)
  prompt_context() {
    if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
--    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
-+    prompt_segment 222 black "%(!.%{%F{yellow}%}.)$(get_prompt)" # Dinesh
+-    prompt_segment 222 black "%(!.%{%F{yellow}%}.)$(get_prompt)" # Dinesh
++    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
    fi
  }
  
@@ -15,8 +15,8 @@ index fe7ddba..fdfac04 100644
      if [[ -n $dirty ]]; then
        prompt_segment yellow black
      else
--      prompt_segment green $CURRENT_FG
-+      prompt_segment 172 $CURRENT_FG # Changed the color - Dinesh
+-      prompt_segment 172 $CURRENT_FG # Changed the color - Dinesh
++      prompt_segment green $CURRENT_FG
      fi
  
      if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -24,39 +24,38 @@ index fe7ddba..fdfac04 100644
  
  # Dir: current working directory
  prompt_dir() {
--  prompt_segment blue $CURRENT_FG '%~'
-+  prompt_segment 117 $CURRENT_FG '%5~' # Changed the blue color - Dinesh
+-  prompt_segment 117 $CURRENT_FG '%5~' # Changed the blue color - Dinesh
++  prompt_segment blue $CURRENT_FG '%~'
  }
  
  # Virtualenv: current working virtualenv
-@@ -238,7 +238,7 @@ prompt_aws() {
+@@ -237,7 +237,7 @@ prompt_aws() {
    [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
    case "$AWS_PROFILE" in
-     *-prod|*production*) prompt_segment red yellow  "AWS: $AWS_PROFILE" ;;
--    *) prompt_segment green black "AWS: $AWS_PROFILE" ;;
-+    *) prompt_segment black "AWS: $AWS_PROFILE" ;;
+     *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
+-    *) prompt_segment black "AWS: $AWS_PROFILE" ;;
++    *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
    esac
  }
  
-@@ -246,8 +246,8 @@ prompt_aws() {
+@@ -245,8 +245,8 @@ prompt_aws() {
  build_prompt() {
    RETVAL=$?
    prompt_status
--  prompt_virtualenv
--  prompt_aws
-+#  prompt_virtualenv
-+#  prompt_aws
+-  #prompt_virtualenv
+-  #prompt_aws
++  prompt_virtualenv
++  prompt_aws
    prompt_context
    prompt_dir
    prompt_git
-diff --git a/themes/robbyrussell.zsh-theme b/themes/robbyrussell.zsh-theme
-index 2fd5f2c..d390f1e 100644
---- a/themes/robbyrussell.zsh-theme
-+++ b/themes/robbyrussell.zsh-theme
+diff -uprN -x cache .oh-my-zsh/themes/robbyrussell.zsh-theme .oh-my-zsh.back/themes/robbyrussell.zsh-theme
+--- .oh-my-zsh/themes/robbyrussell.zsh-theme	2022-01-12 05:35:55.640440886 +0000
++++ .oh-my-zsh.back/themes/robbyrussell.zsh-theme	2022-01-12 04:57:57.879076760 +0000
 @@ -1,5 +1,5 @@
  PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
--PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
-+PROMPT+=' %{$fg[cyan]%}$(get_prompt) %5~%{$reset_color%} %5 $(git_prompt_info)'
+-PROMPT+=' %{$fg[cyan]%}$(get_prompt) %5~%{$reset_color%} %5 $(git_prompt_info)'
++PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
  
  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "

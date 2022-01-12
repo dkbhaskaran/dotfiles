@@ -109,19 +109,6 @@ endif
 
 if has('nvim')
 
-Plugin 'sunjon/shade.nvim'
-lua << EOF
-  require'shade'.setup({
-  overlay_opacity = 50,
-  opacity_step = 1,
-  keys = {
-    brightness_up    = '<C-Up>',
-    brightness_down  = '<C-Down>',
-    toggle           = '<Leader>s',
-  }
-})
-EOF
-
 " Interesting plugin..Try :Telescope live_grep/find_files
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
