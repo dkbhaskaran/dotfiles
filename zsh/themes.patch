@@ -1,13 +1,12 @@
-Binary files .oh-my-zsh/.git/index and .oh-my-zsh.back/.git/index differ
-diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/agnoster.zsh-theme
---- .oh-my-zsh/themes/agnoster.zsh-theme	2022-01-12 05:35:03.899663688 +0000
-+++ .oh-my-zsh.back/themes/agnoster.zsh-theme	2022-01-12 04:57:57.875076776 +0000
+diff -uprN .oh-my-zsh.back/themes/agnoster.zsh-theme .oh-my-zsh/themes/agnoster.zsh-theme
+--- .oh-my-zsh.back/themes/agnoster.zsh-theme	2022-01-12 05:56:04.767878039 +0000
++++ .oh-my-zsh/themes/agnoster.zsh-theme	2022-01-12 05:56:51.280657103 +0000
 @@ -89,7 +89,7 @@ prompt_end() {
  # Context: user@hostname (who am I and where am I)
  prompt_context() {
    if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
--    prompt_segment 222 black "%(!.%{%F{yellow}%}.)$(get_prompt)" # Dinesh
-+    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
++    prompt_segment 222 black "%(!.%{%F{yellow}%}.)$(get_prompt)" # Dinesh
    fi
  }
  
@@ -15,8 +14,8 @@ diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/
      if [[ -n $dirty ]]; then
        prompt_segment yellow black
      else
--      prompt_segment 172 $CURRENT_FG # Changed the color - Dinesh
-+      prompt_segment green $CURRENT_FG
+-      prompt_segment green $CURRENT_FG
++      prompt_segment 172 $CURRENT_FG # Changed the color - Dinesh
      fi
  
      if [[ -e "${repo_path}/BISECT_LOG" ]]; then
@@ -24,8 +23,8 @@ diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/
  
  # Dir: current working directory
  prompt_dir() {
--  prompt_segment 117 $CURRENT_FG '%5~' # Changed the blue color - Dinesh
-+  prompt_segment blue $CURRENT_FG '%~'
+-  prompt_segment blue $CURRENT_FG '%~'
++  prompt_segment 117 $CURRENT_FG '%5~' # Changed the blue color - Dinesh
  }
  
  # Virtualenv: current working virtualenv
@@ -33,8 +32,8 @@ diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/
    [[ -z "$AWS_PROFILE" || "$SHOW_AWS_PROMPT" = false ]] && return
    case "$AWS_PROFILE" in
      *-prod|*production*) prompt_segment red yellow  "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
--    *) prompt_segment black "AWS: $AWS_PROFILE" ;;
-+    *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
+-    *) prompt_segment green black "AWS: ${AWS_PROFILE:gs/%/%%}" ;;
++    *) prompt_segment black "AWS: $AWS_PROFILE" ;;
    esac
  }
  
@@ -42,20 +41,20 @@ diff -uprN -x cache .oh-my-zsh/themes/agnoster.zsh-theme .oh-my-zsh.back/themes/
  build_prompt() {
    RETVAL=$?
    prompt_status
--  #prompt_virtualenv
--  #prompt_aws
-+  prompt_virtualenv
-+  prompt_aws
+-  prompt_virtualenv
+-  prompt_aws
++  #prompt_virtualenv
++  #prompt_aws
    prompt_context
    prompt_dir
    prompt_git
-diff -uprN -x cache .oh-my-zsh/themes/robbyrussell.zsh-theme .oh-my-zsh.back/themes/robbyrussell.zsh-theme
---- .oh-my-zsh/themes/robbyrussell.zsh-theme	2022-01-12 05:35:55.640440886 +0000
-+++ .oh-my-zsh.back/themes/robbyrussell.zsh-theme	2022-01-12 04:57:57.879076760 +0000
+diff -uprN .oh-my-zsh.back/themes/robbyrussell.zsh-theme .oh-my-zsh/themes/robbyrussell.zsh-theme
+--- .oh-my-zsh.back/themes/robbyrussell.zsh-theme	2022-01-12 05:56:04.770878024 +0000
++++ .oh-my-zsh/themes/robbyrussell.zsh-theme	2022-01-12 05:56:51.280657103 +0000
 @@ -1,5 +1,5 @@
  PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
--PROMPT+=' %{$fg[cyan]%}$(get_prompt) %5~%{$reset_color%} %5 $(git_prompt_info)'
-+PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+-PROMPT+=' %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
++PROMPT+=' %{$fg[cyan]%}$(get_prompt) %5~%{$reset_color%} %5 $(git_prompt_info)'
  
  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
