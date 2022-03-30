@@ -66,25 +66,28 @@ function run_tmux() {
 }
 
 function drun() {
-  count=$(docker ps | wc -l)
+  count=$(sudo docker ps | wc -l)
   count=$((count-1))
 
-  container=$(docker run -d -it --name=dbhaskar-${count} --network=host --device=/dev/kfd --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx $1)
-  docker exec -it $container apt update
-  docker exec -it $container apt install -y zsh git wget language-pack-en
-  docker exec -it $container update-locale
+  container=$(sudo docker run -d -it --name=dbhaskar-${count} --network=host --device=/dev/kfd --device=/dev/dri --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host -v $HOME/dockerx:/home/dbhaskar/dockerx $1)
+  sudo docker exec -it $container sh -c "if [ -f /etc/redhat-release ]; then \
+    yum install -y zsh git wget ncurses-devel;\
+  else \
+    apt update && apt install -y zsh git wget language-pack-en && update-locale; \
+  fi"
 
+  sudo docker exec -it $container sh -c "$(wget https://raw.githubusercontent.com/dkbhaskaran/dotfiles/master/install.sh -O -)"
   echo Created container $container
 }
 
 function dexec() {
-  docker exec -it $1 $SHELL
+  sudo docker exec -it $1 $SHELL
 }
 
 function drm() {
   for id in $*; do
-    docker stop $id
-    docker rm $id
+    sudo docker stop $id
+    sudo docker rm $id
   done
 }
 
