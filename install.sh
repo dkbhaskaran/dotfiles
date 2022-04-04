@@ -2,7 +2,7 @@
 
 set -e
 
-mkdir ~/.local
+mkdir -p ~/.local
 
 install_vim() {
   cd ~/.local
