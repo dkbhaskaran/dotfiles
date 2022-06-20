@@ -21,7 +21,7 @@ install_vim() {
 
   #~/.local/bin/nvim +PluginInstall +qall
   #~/.local/bin/nvim +UpdateRemotePlugins +qall
-  git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  git clone https://github.com/dkbhaskaran/AstroNvim.git ~/.config/nvim
   
   rm -f nvim-linux64.tar.gz
 }
