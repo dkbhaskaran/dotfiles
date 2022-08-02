@@ -39,8 +39,8 @@ install_ripgrep() {
 install_debian() {
   cd ~/.local
   wget archive.ubuntu.com/ubuntu/pool/universe/u/universal-ctags/universal-ctags_5.9.20210829.0-1_amd64.deb
-  dpkg -x universal-ctags_0+git20200824-1_amd64.deb .
-  rm -f ripgrep_13.0.0_amd64.deb universal-ctags_0+git20200824-1_amd64.deb
+  dpkg -x universal-ctags_5.9.20210829.0-1_amd64.deb .
+  rm -f ripgrep_13.0.0_amd64.deb universal-ctags_5.9.20210829.0-1_amd64.deb
 }
 
 install_redhat() {
