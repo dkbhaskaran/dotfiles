@@ -10,18 +10,8 @@ install_vim() {
   wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.tar.gz
   tar -xf nvim-linux64.tar.gz --strip-components 1
 
-  #mkdir -p ${HOME}/.config/nvim
-  #git clone https://github.com/gmarik/vundle.git ${DOTFILES}/vim/bundle/vundle
-
-  #ln -s ${DOTFILES}/vim/vimrc ${HOME}/.config/nvim/init.vim
-  #ln -s ${DOTFILES}/vim ${HOME}/.vim
-
-  #mkdir ${HOME}/.vim/backup
-  #mkdir ${HOME}/.vim/swp
-
-  #~/.local/bin/nvim +PluginInstall +qall
-  #~/.local/bin/nvim +UpdateRemotePlugins +qall
   git clone https://github.com/dkbhaskaran/AstroNvim.git ~/.config/nvim
+  ~/.local/bin/nvim +PackerSync
   
   rm -f nvim-linux64.tar.gz
 }
