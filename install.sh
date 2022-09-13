@@ -11,7 +11,7 @@ install_vim() {
   tar -xf nvim-linux64.tar.gz --strip-components 1
 
   git clone https://github.com/dkbhaskaran/AstroNvim.git ~/.config/nvim
-  ~/.local/bin/nvim +PackerSync
+  ~/.local/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   
   rm -f nvim-linux64.tar.gz
 }
