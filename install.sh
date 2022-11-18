@@ -7,7 +7,7 @@ mkdir -p ~/.local
 install_vim() {
   cd ~/.local
 
-  wget https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.tar.gz
+  wget  https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
   tar -xf nvim-linux64.tar.gz --strip-components 1
 
   git clone https://github.com/dkbhaskaran/AstroNvim.git ~/.config/nvim
