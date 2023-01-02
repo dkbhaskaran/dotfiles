@@ -10,8 +10,11 @@ install_vim() {
   wget  https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
   tar -xf nvim-linux64.tar.gz --strip-components 1
 
-  git clone https://github.com/dkbhaskaran/AstroNvim.git ~/.config/nvim
+  git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
   ~/.local/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  
+  mkdir ~/.config/nvim/lua/user
+  cp ${DOTFILES}/vim/init.lua ~/.config/nvim/lua/user
   
   rm -f nvim-linux64.tar.gz
 }
