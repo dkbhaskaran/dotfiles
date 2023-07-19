@@ -79,7 +79,7 @@ echo "source ${DOTFILES}/zsh/setup.sh" >> ~/.zshrc
 
 cd ${HOME}/.oh-my-zsh
 #git apply ${DOTFILES}/zsh/themes.patch
-sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"agnoster\"/g" ${HOME}/.zshrc
+sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"bira\"/g" ${HOME}/.zshrc
 sed -i "s/plugins=(git)/plugins=(git z zsh-autosuggestions zsh-syntax-highlighting)/g" ${HOME}/.zshrc
 
 cd ${HOME}
