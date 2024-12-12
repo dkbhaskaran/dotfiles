@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Open editor
+nvim /tmp/repl.tmux.out -c 'setfiletype log'
+
+# $1 is the original pane id
+# Need current pane id to swap 
+newpane=$(tmux display-message -p '#{pane_id}')
+# swap back once done
+
+tmux swap-pane -s $1 -t $newpane

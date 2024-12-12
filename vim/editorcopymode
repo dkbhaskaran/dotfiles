@@ -1,0 +1,27 @@
+# #!/usr/bin/env bash
+# 1. save current tmux scrollback to tmp file
+# 2. - Create a new pane at a high window number ( 101 ) and open the tmp file
+#       in an editor
+#    - Swap the current pane with this new pane.  
+# 3. Once the editor is exited, swap it back. ( The new pane temp pane will
+# exit automatically and get cleaned up )
+#
+# NOTE: This does not handle additional any error cases
+
+# Capture output
+# -p captures content to stdout
+# -J joins wrapped lines back into one
+# -t target pane. That will be the target pane supplied by the tmux config as $1
+# -S - : specifies start of history
+# -E - : specifies end of history
+rm -f /tmp/repl.tmux.out
+tmux capture-pane -p -J -t $1 -S - -E - > /tmp/repl.tmux.out
+
+# Create new window
+new_pane=$(tmux new-window -d -P -F "#{pane_id}" -t 101 bash -c "showeditor $1" )
+
+# Save the current pane id as a variable in the new pane for it to swap back later
+tmux set-window-option -t $new_pane @original-pane $1
+
+# Swap new pane and current pane
+tmux swap-pane -s $1 -t $new_pane
