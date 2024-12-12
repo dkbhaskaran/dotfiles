@@ -157,7 +157,18 @@ return {
         },
         -- gopls = {},
         -- pyright requires node; use brew install node
-        pyright = {},
+        pyright = {
+          setup = function(on_attach, _capabilities)
+            require('lspconfig').pyright.setup {
+              on_attach = on_attach,
+              capabilities = _capabilities,
+              root_dir = function(fname)
+                -- Always return '/src' as the root directory for Pyright
+                return '/src'
+              end,
+            }
+          end,
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --

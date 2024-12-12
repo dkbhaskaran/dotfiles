@@ -230,6 +230,12 @@ local plugin_list = {
     end,
   },
   {
+    'fei6409/log-highlight.nvim',
+    config = function()
+      require('log-highlight').setup {}
+    end,
+  },
+  {
     'akinsho/toggleterm.nvim',
     version = '*',
     lazy = false,
