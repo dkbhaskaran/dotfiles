@@ -28,8 +28,9 @@
 [core]
 	editor = nvim
 	pager = less -iXFR
+
 [merge]
-	tool = nvim
+	tool = nvimdiff
 
 [difftool]
   prompt = true

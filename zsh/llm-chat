@@ -1,0 +1,108 @@
+import requests
+import json
+import signal
+import sys
+import argparse
+
+# ANSI colors
+RESET = "\033[0m"
+GREEN = "\033[92m"
+CYAN = "\033[96m"
+YELLOW = "\033[93m"
+RED = "\033[91m"
+
+# Global state
+interrupted = False
+
+def signal_handler(sig, frame):
+    global interrupted
+    interrupted = True
+    print(f"\n{CYAN}↪️ Generation interrupted. Back to prompt.{RESET}")
+
+signal.signal(signal.SIGINT, signal_handler)
+
+def check_or_pull_model(base_url, model_name):
+    try:
+        res = requests.get(f"{base_url}/api/tags")
+        res.raise_for_status()
+        tags = res.json().get("models", [])
+
+        if any(m.get("name") == model_name for m in tags):
+            return True
+
+        print(f"{YELLOW}⚠️ Model '{model_name}' not found. Downloading...{RESET}")
+        pull = requests.post(f"{base_url}/api/pull", json={"name": model_name}, stream=True)
+        for line in pull.iter_lines(decode_unicode=True):
+            if line:
+                try:
+                    info = json.loads(line)
+                    status = info.get("status") or info.get("digest", "")
+                    print(f"{GREEN}→ {status}{RESET}", flush=True)
+                except json.JSONDecodeError:
+                    pass
+        print(f"{GREEN}✅ Model '{model_name}' is ready!{RESET}")
+        return True
+    except requests.RequestException as e:
+        print(f"{RED}[Error] Failed to check or pull model: {e}{RESET}")
+        sys.exit(1)
+
+def stream_ollama_response(base_url, prompt, model):
+    global interrupted
+    interrupted = False
+
+    print(f"{CYAN}Assistant:{RESET} ", end="", flush=True)
+
+    try:
+        with requests.post(
+            f"{base_url}/api/generate",
+            json={"model": model, "prompt": prompt, "stream": True},
+            stream=True,
+        ) as response:
+
+            for line in response.iter_lines(decode_unicode=True):
+                if interrupted:
+                    break
+                if not line:
+                    continue
+                try:
+                    data = json.loads(line)
+                    content = data.get("response") or data.get("message", {}).get("content", "")
+                    if content:
+                        print(f"{GREEN}{content}{RESET}", end="", flush=True)
+                    if data.get("done", False):
+                        break
+                except json.JSONDecodeError:
+                    print(f"\n{YELLOW}[Invalid JSON line]{RESET}")
+    except requests.RequestException as e:
+        print(f"\n{RED}[Request error] {e}{RESET}")
+    print()
+    print(f"{CYAN}{'-'*65}{RESET}")
+
+def chat_loop(base_url, model):
+    print(f"{CYAN}💬 Chat with Ollama ({model}){RESET}")
+    while True:
+        try:
+            prompt = input(f"{YELLOW}You:{RESET} ")
+            if prompt.strip().lower() in {"exit", "quit"}:
+                break
+            stream_ollama_response(base_url, prompt, model)
+        except KeyboardInterrupt:
+            print(f"\n{CYAN}↪️ Prompt canceled. Waiting for next input.{RESET}")
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Chat with an Ollama model (streamed, colored, resilient)."
+    )
+    parser.add_argument("--port", type=int, default=11434, help="Ollama port (default: 11434)")
+    parser.add_argument("--model", type=str, default="mistral", help="Model name (default: mistral)")
+
+    args = parser.parse_args()
+    base_url = f"http://localhost:{args.port}"
+    model = args.model
+
+    if check_or_pull_model(base_url, model):
+        chat_loop(base_url, model)
+
+if __name__ == "__main__":
+    main()
+
