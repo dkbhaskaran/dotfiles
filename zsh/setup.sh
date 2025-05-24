@@ -33,7 +33,8 @@ if [ "$SHELL" = "/usr/bin/zsh" ]; then
   zsh_setup
 fi
 
-source ${HOME}/git-repos/dotfiles/zsh/docker.sh
+SCRIPT_DIR="$(realpath "$(dirname "$0")")"
+source ${SCRIPT_DIR}/docker.sh
 
 tmux start-server
 tmux new-session -A -s main
