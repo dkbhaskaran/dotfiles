@@ -44,6 +44,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # link the local configs
 cd ${HOME}
 ln -s ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf  # tmux setup
+mkdir -p ~/.local/bin
 ln -s ${DOTFILES}/tmux/showeditor ~/.local/bin/showeditor
 ln -s ${DOTFILES}/tmux/editorcopymode ~/.local/bin/editorcopymode
 
