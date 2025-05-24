@@ -4,18 +4,9 @@ set -e
 mkdir -p ~/.local
 
 install_vim() {
-  cd ~/.local
-
-  # Should have done ppa based installation but its still a year behind.
-  wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
-  tar -xf nvim-linux-x86_64.tar.gz --strip-components 1
-
+  sudo snap install nvim --classic
+  sudo apt-get install -y curl npm
   git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
-
-  mkdir ~/.config/nvim/lua/user
-  cp ${DOTFILES}/vim/init.lua ~/.config/nvim/lua/user
-
-  rm -f nvim-linux-x86_64.tar.gz
 }
 
 # oh-my-zsh installation and configurations
